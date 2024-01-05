@@ -9,24 +9,24 @@ class DataModelProduct{
     required this.skip,
     required this.total,
     required this.limit,
-});
+  });
 
- factory DataModelProduct.fromjson(Map<String,dynamic> json){
-List<ProductsModel> listProducts = [];
-for(Map<String,dynamic> eachProduct in json["products"] ){
-  var listProduct = ProductsModel.fromjson(eachProduct);
-  listProducts.add(listProduct);
-}
+  factory DataModelProduct.fromjson(Map<String,dynamic> json){
+    List<ProductsModel> listProducts = [];
+    for(Map<String,dynamic> eachProduct in json["products"] ){
+      var listProduct = ProductsModel.fromjson(eachProduct);
+      listProducts.add(listProduct);
+    }
 
 //ProductsModel.fromjson(json['products']);
 
-   return DataModelProduct(
-       products: listProducts,
-       skip: json['skip'],
-       total: json['total'],
-       limit: json['limit'], );
+    return DataModelProduct(
+      products: listProducts,
+      skip: json['skip'],
+      total: json['total'],
+      limit: json['limit'], );
 
- }
+  }
 
 
 
@@ -46,23 +46,23 @@ class ProductsModel {
   final String thumbnail;
   final List<String> images;
 
- ProductsModel({
-required this.id,
-   required this.title,
-   required this.description,
-   required this.price,
-   required this.discountPercentage,
-   required this.rating,
-   required this.stock,
-   required this.brand,
-   required this.category,
-   required this.thumbnail,
-   required this.images
- });
+  ProductsModel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.discountPercentage,
+    required this.rating,
+    required this.stock,
+    required this.brand,
+    required this.category,
+    required this.thumbnail,
+    required this.images
+  });
 
-factory ProductsModel.fromjson(Map<String,dynamic> json){
+  factory ProductsModel.fromjson(Map<String,dynamic> json){
 
-  return ProductsModel(id: json["id"],
+    return ProductsModel(id: json["id"],
       title: json["title"],
       description: json['description'],
       price: json['price'],
@@ -72,10 +72,10 @@ factory ProductsModel.fromjson(Map<String,dynamic> json){
       brand: json["brand"],
       category: json['category'],
       thumbnail: json['thumbnail'],
-      images: (json["images"] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
-  );
+      images:    (json["images"] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
+    );
 
-}
+  }
 
 
 

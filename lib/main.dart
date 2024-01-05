@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 
-import 'package:api_practice/product_api.dart';
+import 'package:api_practice/users_api.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http_client;
 
@@ -34,15 +34,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 // DataModel? dataModel;
-DataModelProduct? dataModelProduct;
+DataModelUsers? dataModelUsers;
 
 @override
   void initState() {
     // TODO: implement initState
     super.initState();
    /* getQuotes();*/
-  getProducts();
-
+//  getProducts();
+getusers();
 
   }
   @override
@@ -56,23 +56,23 @@ DataModelProduct? dataModelProduct;
         title: Text("Featching data. from product api"),
         centerTitle: true,
       ),
-      body: dataModelProduct!=null && dataModelProduct!.products.isNotEmpty ? GridView.builder(
+      body: dataModelUsers!=null && dataModelUsers!.users!.isNotEmpty ? GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Number of items in a row
           crossAxisSpacing: 10.0, // Spacing between columns
           mainAxisSpacing: 10.0, // Spacing between rows
         ),
-        itemCount: dataModelProduct!.products.length,
+        itemCount: dataModelUsers!.users!.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
             elevation: 3,
             child: Column(
               children: [
-                SizedBox(height: 120,width: 120, child: Image.network(dataModelProduct!.products[index].thumbnail)),
-                Text("Price: ${dataModelProduct!.products[index].price}"),
-                Text("BrandName: ${dataModelProduct!.products[index].brand}"),
-                Text("Category: ${dataModelProduct!.products[index].category}"),
-                Text("Rating: ${dataModelProduct!.products[index].rating}"),
+                SizedBox(height: 120,width: 120, child: SizedBox(width: 80, height: 80, child: Image.network(dataModelUsers!.users![index].image!))),
+                Text("Name: ${dataModelUsers!.users![index].firstName!}"),
+                Text("Age: ${dataModelUsers!.users![index].age!}"),
+                Text("Address: ${dataModelUsers!.users![index].address!.address!}"),
+                // Text("Email: ${dataModelUsers!.users![index].email!}"),
 
               ]
             ),
@@ -83,8 +83,8 @@ DataModelProduct? dataModelProduct;
     );
   }
 
-  void getProducts() async{
-  var uri = Uri.parse("https://dummyjson.com/products");
+  void getusers() async{
+  var uri = Uri.parse("https://dummyjson.com/users");
   var respose = await http_client.get(uri);
 
   print(respose);
@@ -94,7 +94,7 @@ DataModelProduct? dataModelProduct;
 if(respose.statusCode==200 ){
   var mData = jsonDecode(respose.body);
 
-  dataModelProduct = DataModelProduct.fromjson(mData);
+  dataModelUsers = DataModelUsers.fromjson(mData);
   setState(() {
 
   });
