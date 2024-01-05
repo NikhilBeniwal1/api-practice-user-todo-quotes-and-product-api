@@ -53,7 +53,7 @@ getusers();
 
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
 
-        title: Text("Featching data. from product api"),
+        title: Text("Featching data. from Users Api"),
         centerTitle: true,
       ),
       body: dataModelUsers!=null && dataModelUsers!.users!.isNotEmpty ? GridView.builder(
@@ -68,6 +68,7 @@ getusers();
             elevation: 3,
             child: Column(
               children: [
+                SizedBox(height: 20,),
                 SizedBox(height: 120,width: 120, child: SizedBox(width: 80, height: 80, child: Image.network(dataModelUsers!.users![index].image!))),
                 Text("Name: ${dataModelUsers!.users![index].firstName!}"),
                 Text("Age: ${dataModelUsers!.users![index].age!}"),
@@ -78,7 +79,7 @@ getusers();
             ),
           );
         },
-      )  : Container(child: Center(child: Text("featching Todos...")),),
+      )  : Container(child: Center(child: Text("featching Users data...")),),
 
     );
   }
